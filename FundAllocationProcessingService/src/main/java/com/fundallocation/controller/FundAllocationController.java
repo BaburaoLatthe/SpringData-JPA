@@ -2,18 +2,16 @@ package com.fundallocation.controller;
 
 /**
  * @author baburao.annasaheb
- * Implemented Controller for Fund Allocation
- *
+ * Implemented Controller for FundAllocation Service
  */
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fundallocation.model.dto.PendingParticipantFundDTO;
 import com.fundallocation.service.FundAllocationService;
 
 @RestController
@@ -24,8 +22,10 @@ public class FundAllocationController {
 	private FundAllocationService fundAllocationService;
 	
 	@PutMapping(path = "/allocatefund")
-	public void allocateNewFund() {
+	public ResponseEntity<HttpStatus> allocateNewFund() {
 		
-		List<PendingParticipantFundDTO> fetchPendingParticipantFund = fundAllocationService.fetchPendingParticipantFund();
+		HttpStatus fetchPendingParticipantFund = fundAllocationService.fetchPendingParticipantFund();
+		
+		return new ResponseEntity<>(fetchPendingParticipantFund);
 	}
 }

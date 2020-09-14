@@ -4,6 +4,7 @@ package com.fundallocation.repository;
  * Implemented Repository for PendingParticipantFund Table
  */
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +19,7 @@ public interface PendingParticipantFundRepository extends JpaRepository<PendingP
 	@Query(value = "SELECT * FROM PENDING_PARTICIPANT_FUND WHERE PROCESSED = 'N' AND REFERENCE_TRANSACTIONID is NULL", nativeQuery = true)
 	public List<PendingParticipantFund> getPendingParticipantFund();
 	
-	@Query(value = "SELECT * FROM PENDING_PARTICIPANT_FUND WHERE REFERENCE_TRANSACTIONID = :refernenceTransactionId", nativeQuery = true )
-	public PendingParticipantFund getPendingParticipantFundFromTransactionId(@Param("refernenceTransactionId") String referenceTransactionId);
+	@Query(value = "SELECT * FROM PENDING_PARTICIPANT_FUND WHERE REFERENCE_TRANSACTIONID = :transactionId", nativeQuery = true )
+	public Optional<PendingParticipantFund> getPendingParticipantFundFromTransactionId(@Param("transactionId") Integer referenceTransactionId);
 	
 }
